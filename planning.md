@@ -19,3 +19,9 @@
 ## Given your inputs, what are the steps necessary to return the desired output?
 ### Initially create game in console via JS 
 1. Three factory function objects, one for gameboard, one for players, and one for gamecontroller. Each one will return methods needed for various game functions. Setting them equal to variables allows those variables to access the methods from the factory function. 
+Gameboard object:
+    - Set the size of the grid and initialize the gameboard array. 
+    - Create the gameboard array with a 2d loop of the correct size. 
+    - Create a function that returns the gameboard. 
+    - Create a function that makes a move on the board. It takes row and column arguments, checks whether place is empty. If so, it adds the correct marker to the square. Otherwise, it returns an error indicating that the square already has a market from the correct player. 
+    - Create a function that prints the gameboard to the console. **Think through how to do this**. 
