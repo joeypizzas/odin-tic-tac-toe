@@ -16,11 +16,50 @@ const gameboard = (function gameBoard() {
         return board;
     }
 
-    function makeMove() {
+    function makeMove(rowMove, columnMove) {
+        let validMove;
+        let invalidMove;
 
+        if (board[rowMove][columnMove] === 0) {
+            if (game.getActivePlayer().token === 1) {
+                board[rowMove][columnMove] = 1;
+            } else {
+                board[rowMove][columnMove] = 2;
+            }
+            return validMove;
+        } else {
+            console.log("Oops! That square is already taken. Please make another move.");
+            return invalidMove;
+        }
     }
 
     return {
         getBoard,
+        makeMove,
+    }
+})();
+
+const game = (function gameController() {
+    let playerOneName = "Player One";
+    let playerTwoName = "Player Two";
+
+    const players = [
+        {
+            name: playerOneName,
+            token: 1
+        },
+        {
+            name: playerTwoName,
+            token: 2
+        }
+    ];
+
+    let activePlayer = players[0];
+    function getActivePlayer() {
+        return activePlayer;
+    }
+
+    return {
+        getActivePlayer,
     }
 })();
