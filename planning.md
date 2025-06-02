@@ -36,7 +36,7 @@
             - Takes board space argument. 
             - Calls function to make a move on the board using board space argument for correct player. 
             - Calls function to print updated board to the console. 
-            - Calls function to switch player turn. 
+            - Calls function to switch player turn, as long as move was valid. 
             - Checks to see if the move resulted in a win or tie for the game, and prints appropriate message to the console, if so. 
         - Returns playRound function because it's needed to play game in the console. 
         - IIFE 
