@@ -33,23 +33,26 @@ const gameboard = (function gameBoard() {
         }
     }
 
+    function printBoard() {
+        console.log(board);
+    }
+
     return {
         getBoard,
         makeMove,
+        printBoard
     }
 })();
 
 const game = (function gameController() {
-    let playerOneName = "Player One";
-    let playerTwoName = "Player Two";
 
     const players = [
         {
-            name: playerOneName,
+            name: "Player One",
             token: 1
         },
         {
-            name: playerTwoName,
+            name: "Player Two",
             token: 2
         }
     ];
