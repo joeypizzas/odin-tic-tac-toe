@@ -45,7 +45,6 @@ const gameboard = (function gameBoard() {
 })();
 
 const game = (function gameController() {
-
     const players = [
         {
             name: "Player One",
@@ -58,11 +57,21 @@ const game = (function gameController() {
     ];
 
     let activePlayer = players[0];
+
     function getActivePlayer() {
         return activePlayer;
     }
 
+    function switchPlayerTurn() {
+        if (activePlayer === players[0]) {
+            activePlayer = players[1];
+        } else {
+            activePlayer = players[0];
+        }
+    }
+
     return {
         getActivePlayer,
+        switchPlayerTurn,
     }
 })();
