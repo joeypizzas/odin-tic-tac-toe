@@ -70,6 +70,10 @@ const game = (function gameController() {
         }
     }
 
+    function playRound(rowMove, columnMove) {
+
+    }
+
     return {
         getActivePlayer,
         switchPlayerTurn,
