@@ -17,8 +17,7 @@ const gameboard = (function gameBoard() {
     }
 
     function makeMove(rowMove, columnMove) {
-        let validMove;
-        let invalidMove;
+        let isValidMove;
 
         if (board[rowMove][columnMove] === 0) {
             if (game.getActivePlayer().token === 1) {
@@ -26,11 +25,12 @@ const gameboard = (function gameBoard() {
             } else {
                 board[rowMove][columnMove] = 2;
             }
-            return validMove;
+            isValidMove = 1;
         } else {
             console.log("Oops! That square is already taken. Please make another move.");
-            return invalidMove;
+            isValidMove = 0;
         }
+        return isValidMove;
     }
 
     function printBoard() {
@@ -70,12 +70,39 @@ const game = (function gameController() {
         }
     }
 
-    function playRound(rowMove, columnMove) {
+    let board = gameboard.getBoard();
+    function checkWinner(board) {
+        for (let i = 0; i < board.length; i++) {
+            if (board[i][0] && board[i][0] === board[i][1] + board[i][0] === board[i][2]) {
+                return board[i][0];
+            }
+        }
+        for (let i = 0; i < board.length; i++) {
+            if (board[0][i] && board[0][i] === board[1][i] && board[0][i] === board[2][i]) {
+                return board[0][i];
+            }
+        }
+        if (board[0][0] && board[0][0] === board[1][1] && board[0][0] === board[2][2]) {
+            return board[0][0];
+        }
+        if (board[0][2] && board[0][2] === board[1][1] && board[0][2] === board[2][0]) {
+            return board[0][2];
+        }
+        return null;
+    }
 
+    function playRound(rowMove, columnMove) {
+        let attemptedMoveWasValid = gameboard.makeMove(rowMove,columnMove);
+        gameboard.printBoard();
+        // check for winner
+        if (attemptedMoveWasValid) {
+            switchPlayerTurn();
+        }
     }
 
     return {
         getActivePlayer,
         switchPlayerTurn,
+        playRound
     }
 })();
