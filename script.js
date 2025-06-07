@@ -124,6 +124,7 @@ const game = (function gameController() {
     return {
         getActivePlayer,
         switchPlayerTurn,
-        playRound
+        playRound, 
+        announceActivePlayer
     }
 })();
