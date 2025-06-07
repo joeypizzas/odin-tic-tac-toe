@@ -5,12 +5,15 @@ const gameboard = (function gameBoard() {
     const columns = 3;
     const board = [];
 
-    for (let i = 0; i < rows; i++) {
-        board[i] = [];
-        for (let j = 0; j < columns; j++) {
-            board[i][j] = 0;
+    function resetBoard() {
+        for (let i = 0; i < rows; i++) {
+            board[i] = [];
+            for (let j = 0; j < columns; j++) {
+                board[i][j] = 0;
+            }
         }
     }
+    resetBoard();
 
     function getBoard() {
         return board;
@@ -40,7 +43,8 @@ const gameboard = (function gameBoard() {
     return {
         getBoard,
         makeMove,
-        printBoard
+        printBoard,
+        resetBoard
     }
 })();
 
@@ -60,6 +64,14 @@ const game = (function gameController() {
 
     function getActivePlayer() {
         return activePlayer;
+    }
+
+    function announceActivePlayer() {
+        if (activePlayer === players[0]) {
+            console.log("Player One, you're now on the clock.");
+        } else {
+            console.log("Player Two, you're now on the clock.");
+        }
     }
 
     function switchPlayerTurn() {
@@ -94,9 +106,18 @@ const game = (function gameController() {
     function playRound(rowMove, columnMove) {
         let attemptedMoveWasValid = gameboard.makeMove(rowMove,columnMove);
         gameboard.printBoard();
-        // check for winner
-        if (attemptedMoveWasValid) {
-            switchPlayerTurn();
+        if (checkWinner(board)) {
+            if (checkWinner(board) === 1) {
+                console.log("Player One wins, congratulations!");
+            } else {
+                console.log("Player Two wins, congratulations!");
+                switchPlayerTurn();
+            }
+        } else {
+            if (attemptedMoveWasValid) {
+                switchPlayerTurn();
+                announceActivePlayer();
+            }
         }
     }
 
