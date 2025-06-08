@@ -26,8 +26,46 @@ body {
     color: #3F51B5;
 }
 
-#game-area {
+#game-container {
+    flex: 1;
+    background-color: #FCE38A;
+    padding: 2rem;
+}
 
+#instructions-and-new-game {
+    display: flex;
+    justify-content: space-between;
+}
+
+#instructions {
+    color: #212121;
+}
+
+button {
+    color: #FF5722;
+    background-color: #FCE38A;
+    border: 2px solid;
+    border-radius: 7px;
+    padding: .5rem 1rem .5rem 1rem;
+}
+
+button:hover {
+    color: #3F51B5;
+}
+
+#player-info-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.player-name {
+    color: #212121;
 }
 
 #footer-container {
