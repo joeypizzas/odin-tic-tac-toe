@@ -146,6 +146,7 @@ const game = (function gameController() {
 const ui = (function changeUI() {
     const boardArr = gameboard.getBoard();
     const gameboardElement = document.querySelector("#gameboard");
+    const playerInfoContainer = document.querySelector("#player-info-container");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -177,11 +178,20 @@ const ui = (function changeUI() {
         displayBoard();
     }
 
+    function announcePlayerTurn() {
+        const activePlayer = game.getActivePlayer();
+        const activePlayerAnnouncement = document.createElement("div");
+        activePlayerAnnouncement.textContent = `It's ${activePlayer.name}'s turn. Make your move!`;
+        activePlayerAnnouncement.classList.add("player-name");
+        playerInfoContainer.appendChild(activePlayerAnnouncement);
+    }
 
     return {
         displayBoard,
         newGame,
+        announcePlayerTurn
     }
 })();
 
 ui.displayBoard();
+ui.announcePlayerTurn();
