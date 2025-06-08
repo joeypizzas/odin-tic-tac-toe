@@ -30,6 +30,9 @@ body {
     flex: 1;
     background-color: #FCE38A;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 #instructions-and-new-game {
@@ -51,6 +54,30 @@ button {
 
 button:hover {
     color: #3F51B5;
+}
+
+#player-info-and-gameboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#gameboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-row {
+    display: flex;
+}
+
+.board-square {
+    display: block;
+    padding: 0;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 0;
 }
 
 #player-info-container {
