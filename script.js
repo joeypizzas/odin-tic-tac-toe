@@ -60,8 +60,15 @@ const game = (function gameController() {
         }
     ];
 
-    let activePlayer = players[0];
+    function updatePlayerName(playerToUpdate, newName) {
+        if (playerToUpdate === players[0].token) {
+            players[0].name = newName;
+        } else {
+            players[1].name = newName;
+        }
+    }
 
+    let activePlayer = players[0];
     function getActivePlayer() {
         return activePlayer;
     }
@@ -125,6 +132,7 @@ const game = (function gameController() {
         getActivePlayer,
         switchPlayerTurn,
         playRound, 
-        announceActivePlayer
+        announceActivePlayer,
+        updatePlayerName
     }
 })();
