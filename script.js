@@ -51,11 +51,11 @@ const gameboard = (function gameBoard() {
 const game = (function gameController() {
     const players = [
         {
-            name: "Player One",
+            name: "Player one",
             token: 1
         },
         {
-            name: "Player Two",
+            name: "Player two",
             token: 2
         }
     ];
@@ -66,6 +66,11 @@ const game = (function gameController() {
         } else {
             players[1].name = newName;
         }
+    }
+
+    function resetPlayerNames() {
+        players[0].name = "Player one";
+        players[1].name = "Player two";
     }
 
     let activePlayer = players[0];
@@ -89,7 +94,7 @@ const game = (function gameController() {
         }
     }
 
-    let board = gameboard.getBoard();
+    const board = gameboard.getBoard();
     function checkWinner(board) {
         for (let i = 0; i < board.length; i++) {
             if (board[i][0] && board[i][0] === board[i][1] + board[i][0] === board[i][2]) {
@@ -133,6 +138,44 @@ const game = (function gameController() {
         switchPlayerTurn,
         playRound, 
         announceActivePlayer,
-        updatePlayerName
+        updatePlayerName,
+        resetPlayerNames
     }
 })();
+
+const ui = (function changeUI() {
+    const boardArr = gameboard.getBoard();
+    const gameboardElement = document.querySelector("#gameboard");
+    
+    function displayBoard() {
+        for (i = 0; i < boardArr.length; i++) {
+            const boardRow = document.createElement("div");
+            boardRow.classList.add("board-row");
+            for (j = 0; j < boardArr.length; j++) {
+                const boardSquare = document.createElement("button");
+                boardSquare.classList.add("board-square");
+                if (boardArr[i][j] === 1) {
+                    boardSquare.textContent = "X";
+                } else if (boardArr[i][j] === 2) {
+                    boardSquare.textContent = "O";
+                }
+                boardRow.appendChild(boardSquare);
+            }
+            gameboardElement.appendChild(boardRow);
+        }
+    }
+
+    function newGame() {
+        gameboard.resetBoard();
+        game.resetPlayerNames();
+        displayBoard();
+    }
+
+
+    return {
+        displayBoard,
+        newGame
+    }
+})();
+
+ui.displayBoard();
