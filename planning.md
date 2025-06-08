@@ -18,7 +18,7 @@
 - Gameboard. Comes from player moves on the gameboard. 
 ## Given your inputs, what are the steps necessary to return the desired output?
 ### Initially create game in console via JS 
-1. Three factory function objects, one for gameboard, one for players, and one for gamecontroller. Each one will return methods needed for various game functions. Setting them equal to variables allows those variables to access the methods from the factory function. 
+1. Factory function objects, one for gameboard, one for players, and one for gamecontroller. Each one will return methods needed for various game functions. Setting them equal to variables allows those variables to access the methods from the factory function. 
     - Gameboard object:
         - Set the size of the grid and initialize the gameboard array. 
         - Create the gameboard array with a 2d loop of the correct size. Squares will have 0 unless they are filled. Otherwise 1 for player 1 or 2 for player 2. 
@@ -38,6 +38,16 @@
             - Calls function to print updated board to the console. 
             - Calls function to switch player turn, as long as move was valid. 
             - Checks to see if the move resulted in a win or tie for the game, and prints appropriate message to the console, if so. 
+        - Function that updates player name. 
         - Returns playRound function because it's needed to play game in the console. 
         - IIFE 
+2. Factory function for updating UI. 
+    - Function that gets board state and writes it to the UI. 
+    - Function that resets board storage and resets board in the UI. 
+    - Function that announces player turn in the UI. 
+    - Function that announces winner in the UI. 
+    - Function that announces if square is already taken up. 
+    - Function that opens modal to updater player name. 
+    - Function that closes modal to update player name. 
+    - Function that updates player name in the UI. 
 
