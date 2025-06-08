@@ -165,7 +165,13 @@ const ui = (function changeUI() {
         }
     }
 
+    function removeBoard() {
+        const boardRows = document.querySelectorAll(".board-row");
+        boardRows.forEach(row => row.remove());
+    }
+
     function newGame() {
+        removeBoard();
         gameboard.resetBoard();
         game.resetPlayerNames();
         displayBoard();
@@ -174,7 +180,7 @@ const ui = (function changeUI() {
 
     return {
         displayBoard,
-        newGame
+        newGame,
     }
 })();
 
