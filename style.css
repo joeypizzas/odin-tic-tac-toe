@@ -23,6 +23,7 @@ body {
 
 #title {
     font-size: 3rem;
+    font-weight: 700;
     color: #3F51B5;
 }
 
@@ -41,7 +42,7 @@ body {
 }
 
 #instructions {
-    color: #212121;
+    color: #3F51B5;
 }
 
 button {
@@ -79,6 +80,7 @@ button:hover {
     height: 8rem;
     border-radius: 0;
     font-size: 3rem;
+    font-weight: 700;
     border-color: #FF5722;
     color:#3F51B5;
 }
@@ -100,7 +102,7 @@ button:hover {
 }
 
 .player-name {
-    color: #212121;
+    color: #3F51B5;
 }
 
 #footer-container {
