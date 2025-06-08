@@ -78,6 +78,13 @@ button:hover {
     width: 8rem;
     height: 8rem;
     border-radius: 0;
+    font-size: 3rem;
+    border-color: #FF5722;
+    color:#3F51B5;
+}
+
+.board-square:hover {
+    border-color: #3F51B5;
 }
 
 #player-info-container {
