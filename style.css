@@ -1,1 +1,51 @@
 /* Style for tic tac toe */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #FCE38A;
+}
+
+#title {
+    font-size: 3rem;
+    color: #3F51B5;
+}
+
+#game-area {
+
+}
+
+#footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem;
+    background-color: #FCE38A;
+}
+
+#footer {
+    color: #3F51B5;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF5722;
+}
