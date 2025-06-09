@@ -30,7 +30,7 @@ const gameboard = (function gameBoard() {
             }
             isValidMove = 1;
         } else {
-            console.log("Oops! That square is already taken. Please make another move.");
+            ui.announceInvalidMove();
             isValidMove = 0;
         }
         return isValidMove;
@@ -178,8 +178,12 @@ const ui = (function changeUI() {
         if (priorActivePlayer) {
             priorActivePlayer.remove();
         }
+        const priorInvalidAnnouncement = document.querySelector(".invalid-announcement");
+        if (priorInvalidAnnouncement) {
+            priorInvalidAnnouncement.remove();
+        }
         const priorWinner = document.querySelector(".winner-announcement");
-        if(priorWinner) {
+        if (priorWinner) {
             priorWinner.remove();
         }
         displayBoard();
@@ -189,6 +193,10 @@ const ui = (function changeUI() {
         const priorActivePlayer = document.querySelector(".active-player-announcement");
         if (priorActivePlayer) {
             priorActivePlayer.remove();
+        }
+        const priorInvalidAnnouncement = document.querySelector(".invalid-announcement");
+        if (priorInvalidAnnouncement) {
+            priorInvalidAnnouncement.remove();
         }
 
         const activePlayer = game.getActivePlayer();
@@ -201,7 +209,13 @@ const ui = (function changeUI() {
 
     function announceWinner() {
         const priorActivePlayer = document.querySelector(".active-player-announcement");
-        priorActivePlayer.remove();
+        if (priorActivePlayer) {
+            priorActivePlayer.remove();
+        }
+        const priorInvalidAnnouncement = document.querySelector(".invalid-announcement");
+        if (priorInvalidAnnouncement) {
+            priorInvalidAnnouncement.remove();
+        }
 
         const activePlayer = game.getActivePlayer();
         const winnerAccouncement = document.createElement("div");
@@ -211,12 +225,25 @@ const ui = (function changeUI() {
         playerInfoContainer.appendChild(winnerAccouncement);
     }
 
+    function announceInvalidMove() {
+        const priorActivePlayer = document.querySelector(".active-player-announcement");
+        priorActivePlayer.remove();
+
+        const activePlayer = game.getActivePlayer();
+        const invalidAnnouncement = document.createElement("div");
+        invalidAnnouncement.classList.add("player-name");
+        invalidAnnouncement.classList.add("invalid-announcement");
+        invalidAnnouncement.textContent = `Oops! There's already a token there. It's still ${activePlayer.name}'s move.`;
+        playerInfoContainer.appendChild(invalidAnnouncement);
+    }
+
     return {
         displayBoard,
         newGame,
         announcePlayerTurn,
         announceWinner,
         removeBoard,
+        announceInvalidMove,
         
     }
 })();
