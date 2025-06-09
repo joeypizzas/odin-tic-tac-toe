@@ -119,10 +119,8 @@ const game = (function gameController() {
         let attemptedMoveWasValid = gameboard.makeMove(rowMove,columnMove);
         gameboard.printBoard();
         if (checkWinner(board)) {
-            if (checkWinner(board) === 1) {
-                console.log("Player One wins, congratulations!");
-            } else {
-                console.log("Player Two wins, congratulations!");
+            ui.announceWinner();
+            if (checkWinner(board) === 2) {
                 switchPlayerTurn();
             }
         } else {
@@ -147,6 +145,9 @@ const ui = (function changeUI() {
     const boardArr = gameboard.getBoard();
     const gameboardElement = document.querySelector("#gameboard");
     const playerInfoContainer = document.querySelector("#player-info-container");
+    const priorActivePlayer = document.querySelector(".active-player-announcement");
+    const activePlayer = game.getActivePlayer();
+    const priorWinner = document.querySelector("winner-announcement");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -175,21 +176,36 @@ const ui = (function changeUI() {
         removeBoard();
         gameboard.resetBoard();
         game.resetPlayerNames();
+        priorActivePlayer.remove();
+        priorWinner.remove();
         displayBoard();
     }
 
     function announcePlayerTurn() {
-        const activePlayer = game.getActivePlayer();
+        priorActivePlayer.remove();
+
         const activePlayerAnnouncement = document.createElement("div");
         activePlayerAnnouncement.textContent = `It's ${activePlayer.name}'s turn. Make your move!`;
         activePlayerAnnouncement.classList.add("player-name");
+        activePlayerAnnouncement.classList.add("active-player-announcement");
         playerInfoContainer.appendChild(activePlayerAnnouncement);
+    }
+
+    function announceWinner() {
+        priorActivePlayer.remove();
+
+        const winnerAccouncement = document.createElement("div");
+        winnerAccouncement.classList.add("player-name");
+        winnerAccouncement.classList.add("winner-announcement");
+        winnerAccouncement.textContent(`${activePlayer.name} is the winner. Congratulations!`);
+        playerInfoContainer.appendChild(winnerAccouncement);
     }
 
     return {
         displayBoard,
         newGame,
-        announcePlayerTurn
+        announcePlayerTurn,
+        announceWinner,
     }
 })();
 
