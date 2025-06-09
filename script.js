@@ -117,7 +117,8 @@ const game = (function gameController() {
 
     function playRound(rowMove, columnMove) {
         let attemptedMoveWasValid = gameboard.makeMove(rowMove,columnMove);
-        gameboard.printBoard();
+        ui.removeBoard();
+        ui.displayBoard();
         if (checkWinner(board)) {
             ui.announceWinner();
             if (checkWinner(board) === 2) {
@@ -126,7 +127,7 @@ const game = (function gameController() {
         } else {
             if (attemptedMoveWasValid) {
                 switchPlayerTurn();
-                announceActivePlayer();
+                ui.announcePlayerTurn();
             }
         }
     }
@@ -145,9 +146,6 @@ const ui = (function changeUI() {
     const boardArr = gameboard.getBoard();
     const gameboardElement = document.querySelector("#gameboard");
     const playerInfoContainer = document.querySelector("#player-info-container");
-    const priorActivePlayer = document.querySelector(".active-player-announcement");
-    const activePlayer = game.getActivePlayer();
-    const priorWinner = document.querySelector("winner-announcement");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -176,14 +174,24 @@ const ui = (function changeUI() {
         removeBoard();
         gameboard.resetBoard();
         game.resetPlayerNames();
-        priorActivePlayer.remove();
-        priorWinner.remove();
+        const priorActivePlayer = document.querySelector(".active-player-announcement");
+        if (priorActivePlayer) {
+            priorActivePlayer.remove();
+        }
+        const priorWinner = document.querySelector(".winner-announcement");
+        if(priorWinner) {
+            priorWinner.remove();
+        }
         displayBoard();
     }
 
     function announcePlayerTurn() {
-        priorActivePlayer.remove();
+        const priorActivePlayer = document.querySelector(".active-player-announcement");
+        if (priorActivePlayer) {
+            priorActivePlayer.remove();
+        }
 
+        const activePlayer = game.getActivePlayer();
         const activePlayerAnnouncement = document.createElement("div");
         activePlayerAnnouncement.textContent = `It's ${activePlayer.name}'s turn. Make your move!`;
         activePlayerAnnouncement.classList.add("player-name");
@@ -192,12 +200,14 @@ const ui = (function changeUI() {
     }
 
     function announceWinner() {
+        const priorActivePlayer = document.querySelector(".active-player-announcement");
         priorActivePlayer.remove();
 
+        const activePlayer = game.getActivePlayer();
         const winnerAccouncement = document.createElement("div");
         winnerAccouncement.classList.add("player-name");
         winnerAccouncement.classList.add("winner-announcement");
-        winnerAccouncement.textContent(`${activePlayer.name} is the winner. Congratulations!`);
+        winnerAccouncement.textContent = `${activePlayer.name} is the winner. Congratulations!`;
         playerInfoContainer.appendChild(winnerAccouncement);
     }
 
@@ -206,6 +216,8 @@ const ui = (function changeUI() {
         newGame,
         announcePlayerTurn,
         announceWinner,
+        removeBoard,
+        
     }
 })();
 
