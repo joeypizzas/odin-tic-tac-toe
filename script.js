@@ -199,6 +199,10 @@ const ui = (function changeUI() {
             priorWinner.remove();
         }
         displayBoard();
+        if (game.getActivePlayer().token === 2) {
+            game.switchPlayerTurn();
+        }
+        announcePlayerTurn();
     }
 
     function announcePlayerTurn() {
@@ -294,7 +298,15 @@ const ui = (function changeUI() {
     });
     newGameButton.addEventListener("mouseout", () => {
         newGameButton.style.color = "#FF5722";
-    })
+    });
+    newGameButton.addEventListener("mousedown", () => {
+        newGameButton.style.color = "#FF5722";
+    });
+    newGameButton.addEventListener("mouseup", () => {
+        newGameButton.style.color = "#3F51B5";
+        newGame();
+        updatePlayerNamesInUI();
+    });
     
 
     return {
