@@ -159,6 +159,8 @@ const ui = (function changeUI() {
     const playerOneName = document.querySelector("#player-one-name");
     const playerTwoName = document.querySelector("#player-two-name");
     const newGameButton = document.querySelector("#new-game-button");
+    const playerOneButton = document.querySelector("#player-one-button");
+    const playerTwoButton = document.querySelector("#player-two-button");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -332,8 +334,35 @@ const ui = (function changeUI() {
         }
         game.playRound(event.target.dataset.row, event.target.dataset.column);
     });
-    
 
+    playerOneButton.addEventListener("mouseover", () => {
+        playerOneButton.style.color = "#3F51B5";
+    });
+    playerOneButton.addEventListener("mouseout", () => {
+        playerOneButton.style.color = "#FF5722";
+    });
+    playerOneButton.addEventListener("mousedown", () => {
+        playerOneButton.style.color = "#FF5722";
+    });
+    playerOneButton.addEventListener("mouseup", () => {
+        playerOneButton.style.color = "#3F51B5";
+        openDialog();
+    });
+
+    playerTwoButton.addEventListener("mouseover", () => {
+        playerTwoButton.style.color = "#3F51B5";
+    });
+    playerTwoButton.addEventListener("mouseout", () => {
+        playerTwoButton.style.color = "#FF5722";
+    });
+    playerTwoButton.addEventListener("mousedown", () => {
+        playerTwoButton.style.color = "#FF5722";
+    });
+    playerTwoButton.addEventListener("mouseup", () => {
+        playerTwoButton.style.color = "#3F51B5";
+        openDialog();
+    });
+    
     return {
         displayBoard,
         newGame,
