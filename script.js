@@ -146,6 +146,11 @@ const ui = (function changeUI() {
     const boardArr = gameboard.getBoard();
     const gameboardElement = document.querySelector("#gameboard");
     const playerInfoContainer = document.querySelector("#player-info-container");
+    const titleContainer = document.querySelector("#title-container");
+    const gameContainer = document.querySelector("#game-container");
+    const footerContainer = document.querySelector("#footer-container");
+    const dialog = document.querySelector("dialog");
+    const input = document.querySelector("input");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -237,6 +242,13 @@ const ui = (function changeUI() {
         playerInfoContainer.appendChild(invalidAnnouncement);
     }
 
+    function openDialog() {
+        titleContainer.classList.add("blur");
+        gameContainer.classList.add("blur");
+        footerContainer.classList.add("blur");
+        dialog.showModal();
+    }
+
     return {
         displayBoard,
         newGame,
@@ -244,7 +256,7 @@ const ui = (function changeUI() {
         announceWinner,
         removeBoard,
         announceInvalidMove,
-        
+        openDialog,
     }
 })();
 
