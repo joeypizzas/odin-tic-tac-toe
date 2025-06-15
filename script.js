@@ -142,7 +142,8 @@ const game = (function gameController() {
         announceActivePlayer,
         updatePlayerName,
         resetPlayerNames,
-        getPlayers
+        getPlayers, 
+        checkWinner
     }
 })();
 
@@ -166,6 +167,8 @@ const ui = (function changeUI() {
             for (j = 0; j < boardArr.length; j++) {
                 const boardSquare = document.createElement("button");
                 boardSquare.classList.add("board-square");
+                boardSquare.dataset.row = i;
+                boardSquare.dataset.column = j;
                 if (boardArr[i][j] === 1) {
                     boardSquare.textContent = "X";
                 } else if (boardArr[i][j] === 2) {
@@ -327,6 +330,7 @@ const ui = (function changeUI() {
         if (event.target.tagName === "BUTTON") {
             event.target.style.borderColor = "#3F51B5";
         }
+        game.playRound(event.target.dataset.row, event.target.dataset.column);
     });
     
 
