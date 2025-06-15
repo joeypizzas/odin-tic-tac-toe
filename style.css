@@ -53,10 +53,6 @@ button {
     padding: .5rem 1rem .5rem 1rem;
 }
 
-button:hover {
-    color: #3F51B5;
-}
-
 #player-info-and-gameboard {
     display: flex;
     flex-direction: column;
@@ -82,11 +78,6 @@ button:hover {
     font-size: 3rem;
     font-weight: 700;
     border-color: #FF5722;
-    color:#3F51B5;
-}
-
-.board-square:hover {
-    border-color: #3F51B5;
 }
 
 #player-info-container {

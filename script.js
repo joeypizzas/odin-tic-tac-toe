@@ -307,6 +307,27 @@ const ui = (function changeUI() {
         newGame();
         updatePlayerNamesInUI();
     });
+
+    gameboardElement.addEventListener("mouseover", (event) => {
+        if (event.target.tagName === "BUTTON") {
+            event.target.style.borderColor = "#3F51B5";
+        }
+    });
+    gameboardElement.addEventListener("mouseout", (event) => {
+        if (event.target.tagName === "BUTTON") {
+            event.target.style.borderColor = "#FF5722";
+        }
+    });
+    gameboardElement.addEventListener("mousedown", (event) => {
+        if (event.target.tagName === "BUTTON") {
+            event.target.style.borderColor = "#FF5722";
+        }
+    });
+    gameboardElement.addEventListener("mouseup", (event) => {
+        if (event.target.tagName === "BUTTON") {
+            event.target.style.borderColor = "#3F51B5";
+        }
+    });
     
 
     return {
