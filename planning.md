@@ -56,4 +56,7 @@
     - Event listnener on each change name button. Opens modal for changing player name. 
     - Event listener for click outside modal to close it. 
     - Event listener for submitting name to update player name in object and call function to update it in the UI. 
-
+4. Bugs: 
+    - Don't allow to place on the board once a winner has been declared. 
+    - Don't allow more than one winner statement, should be solved by the above. 
+    - Announce there is a draw if the board results in a draw. 
