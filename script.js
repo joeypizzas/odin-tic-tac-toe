@@ -157,6 +157,7 @@ const ui = (function changeUI() {
     const instructions = document.querySelector("#instructions");
     const playerOneName = document.querySelector("#player-one-name");
     const playerTwoName = document.querySelector("#player-two-name");
+    const newGameButton = document.querySelector("#new-game-button");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -287,6 +288,14 @@ const ui = (function changeUI() {
         footerContainer.classList.remove("blur");
         dialog.close();
     }
+
+    newGameButton.addEventListener("mouseover", () => {
+        newGameButton.style.color = "#3F51B5";
+    });
+    newGameButton.addEventListener("mouseout", () => {
+        newGameButton.style.color = "#FF5722";
+    })
+    
 
     return {
         displayBoard,
