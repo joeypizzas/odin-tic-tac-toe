@@ -249,6 +249,13 @@ const ui = (function changeUI() {
         dialog.showModal();
     }
 
+    function closeDialog() {
+        titleContainer.classList.remove("blur");
+        gameContainer.classList.remove("blur");
+        footerContainer.classList.remove("blur");
+        dialog.close();
+    }
+
     return {
         displayBoard,
         newGame,
@@ -257,6 +264,7 @@ const ui = (function changeUI() {
         removeBoard,
         announceInvalidMove,
         openDialog,
+        closeDialog
     }
 })();
 
