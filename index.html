@@ -32,6 +32,15 @@
             </div>
         </div>
     </div>
+    <dialog>
+        <div id="dialog-text">
+            <div id="dialog-header">Change name</div>
+            <div id="dialog-subheader">Enter your new name.</div>
+        </div>
+        <form action="/submit" method="POST">
+            <input id="title-field" class="form-field" type="text" name="name" placeholder="Name" maxlength="50" pattern="[A-Za-z0-9 ,.'\-:!?]+" required>
+            <button id="change-name-button">Submit name</button>
+    </dialog>
     <div id="footer-container">
         <div id="footer">Created by <a href="https://github.com/joeypizzas">joeypizzas</a></div>
     </div>

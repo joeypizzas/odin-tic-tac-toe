@@ -105,6 +105,72 @@ button:hover {
     color: #3F51B5;
 }
 
+dialog[open] {
+    all: unset; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FCE38A;
+    border: none;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 90vw;
+    width: 300px;
+    gap: 1rem;
+  }
+
+  #dialog-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+  }
+
+  #dialog-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3F51B5;
+  }
+
+  #dialog-subheader {
+    color: #3F51B5;
+  }
+  
+form {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+input {
+    background-color: #FCE38A;
+    padding: .55rem;
+    border: 2px solid #FF5722;
+    color: #FF5722;
+    border-radius: 6px;
+    outline: none;
+}
+
+input::placeholder {
+    color: #FF5722;
+    opacity: 0.7;
+}
+
+input:focus {
+    border-color: #3F51B5;
+}
+
+input:hover {
+    border-color: #3F51B5;
+}
+
 #footer-container {
     display: flex;
     justify-content: center;
