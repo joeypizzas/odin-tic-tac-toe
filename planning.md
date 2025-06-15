@@ -50,4 +50,10 @@
     - Function that opens modal to updater player name. 
     - Function that closes modal to update player name. 
     - Function that updates player name in the UI. 
+3. Event listeners:
+    - Event listener using propogation on all gameboard buttons. Maybe add data attribute for row and column place of sqaures. Call playRound using that data attribute as parameters. 
+    - Event listener on new game button. Call new game function. 
+    - Event listnener on each change name button. Opens modal for changing player name. 
+    - Event listener for click outside modal to close it. 
+    - Event listener for submitting name to update player name in object and call function to update it in the UI. 
 
