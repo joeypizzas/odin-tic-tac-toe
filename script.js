@@ -13,7 +13,6 @@ const gameboard = (function gameBoard() {
             }
         }
     }
-    resetBoard();
 
     function getBoard() {
         return board;
@@ -59,6 +58,10 @@ const game = (function gameController() {
             token: 2
         }
     ];
+
+    function getPlayers() {
+        return players;
+    }
 
     function updatePlayerName(playerToUpdate, newName) {
         if (playerToUpdate === players[0].token) {
@@ -138,7 +141,8 @@ const game = (function gameController() {
         playRound, 
         announceActivePlayer,
         updatePlayerName,
-        resetPlayerNames
+        resetPlayerNames,
+        getPlayers
     }
 })();
 
@@ -150,7 +154,9 @@ const ui = (function changeUI() {
     const gameContainer = document.querySelector("#game-container");
     const footerContainer = document.querySelector("#footer-container");
     const dialog = document.querySelector("dialog");
-    const input = document.querySelector("input");
+    const instructions = document.querySelector("#instructions");
+    const playerOneName = document.querySelector("#player-one-name");
+    const playerTwoName = document.querySelector("#player-two-name");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -242,6 +248,32 @@ const ui = (function changeUI() {
         playerInfoContainer.appendChild(invalidAnnouncement);
     }
 
+    function updatePlayerNamesInUI() {
+        const players = game.getPlayers();
+
+        instructions.textContent = `Win the game with three in a row in any direction. ${players[0].name} uses X. ${players[1].name} uses O.`
+        playerOneName.textContent = `${players[0].name}`;
+        playerTwoName.textContent = `${players[1].name}`;
+
+        const priorActivePlayer = document.querySelector(".active-player-announcement");
+        if (priorActivePlayer) {
+            priorActivePlayer.remove();
+            announcePlayerTurn();
+        }
+
+        const priorInvalidAnnouncement = document.querySelector(".invalid-announcement");
+        if (priorInvalidAnnouncement) {
+            priorInvalidAnnouncement.remove();
+            announceInvalidMove();
+        }
+
+        const priorWinner = document.querySelector(".winner-announcement");
+        if (priorWinner) {
+            priorWinner.remove();
+            announceWinner();
+        }
+    }
+
     function openDialog() {
         titleContainer.classList.add("blur");
         gameContainer.classList.add("blur");
@@ -264,9 +296,12 @@ const ui = (function changeUI() {
         removeBoard,
         announceInvalidMove,
         openDialog,
-        closeDialog
+        closeDialog,
+        updatePlayerNamesInUI
     }
 })();
 
+gameboard.resetBoard();
 ui.displayBoard();
+ui.updatePlayerNamesInUI();
 ui.announcePlayerTurn();
