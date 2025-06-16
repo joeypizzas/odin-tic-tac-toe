@@ -8,27 +8,27 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="title-container">
+    <div id="title-container" class="dialog-background">
         <div id="title">Tic Tac Toe</div>
     </div>
     <div id="game-container">
-        <div id="instructions-and-new-game">
+        <div id="instructions-and-new-game" class="dialog-background">
             <div id="instructions"></div>
             <button id="new-game-button">New game</button>
         </div>
         <div id="player-info-and-gameboard">
             <div id="player-info-container">
                 <div class="player-info">
-                    <div class="player-name" id="player-one-name"></div>
+                    <div class="player-name" id="player-one-name" class="dialog-background"></div>
                     <button id="player-one-button">Change name</button>
                 </div>
                 <div class="player-info">
-                    <div class="player-name" id="player-two-name"></div>
+                    <div class="player-name" id="player-two-name" class="dialog-background"></div>
                     <button id="player-two-button">Change name</button>
                 </div>
             </div>
-            <div id="gameboard-container">
-                <div id="gameboard"></div>
+            <div id="gameboard-container" class="dialog-background">
+                <div id="gameboard" class="dialog-background"></div>
             </div>
         </div>
     </div>
@@ -38,10 +38,11 @@
             <div id="dialog-subheader">Enter your new name.</div>
         </div>
         <form action="/submit" method="POST">
-            <input id="title-field" class="form-field" type="text" name="name" placeholder="Name" maxlength="50" pattern="[A-Za-z0-9 ,.'\-:!?]+" required>
+            <input type="text" name="name" placeholder="Name" maxlength="50" pattern="[A-Za-z0-9 ,.'\-:!?]+" required>
             <button id="change-name-button">Submit name</button>
+        <form>
     </dialog>
-    <div id="footer-container">
+    <div id="footer-container" class="dialog-background">
         <div id="footer">Created by <a href="https://github.com/joeypizzas">joeypizzas</a></div>
     </div>
 </body>
