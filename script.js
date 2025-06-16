@@ -161,6 +161,8 @@ const ui = (function changeUI() {
     const newGameButton = document.querySelector("#new-game-button");
     const playerOneButton = document.querySelector("#player-one-button");
     const playerTwoButton = document.querySelector("#player-two-button");
+    const dialogBackground = document.querySelectorAll(".dialog-background");
+    const changeNameButton = document.querySelector("#change-name-button");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -288,7 +290,7 @@ const ui = (function changeUI() {
         titleContainer.classList.add("blur");
         gameContainer.classList.add("blur");
         footerContainer.classList.add("blur");
-        dialog.showModal();
+        dialog.show();
     }
 
     function closeDialog() {
@@ -346,6 +348,7 @@ const ui = (function changeUI() {
     });
     playerOneButton.addEventListener("mouseup", () => {
         playerOneButton.style.color = "#3F51B5";
+        playerOneButton.classList.add("change-player-one-name");
         openDialog();
     });
 
@@ -360,7 +363,34 @@ const ui = (function changeUI() {
     });
     playerTwoButton.addEventListener("mouseup", () => {
         playerTwoButton.style.color = "#3F51B5";
+        playerTwoButton.classList.add("change-player-two-name");
         openDialog();
+    });
+
+    dialogBackground.forEach(container => {
+        container.addEventListener("click", () => {
+            closeDialog();
+            if (playerOneButton.classList.contains("change-player-one-name")) {
+                playerOneButton.classList.remove("change-player-one-name");
+            }
+            if (playerTwoButton.classList.contains("change-player-two-name")) {
+                playerTwoButton.classList.remove("change-player-two-name");
+            }
+        });
+    });
+
+    changeNameButton.addEventListener("mouseover", () => {
+        changeNameButton.style.color = "#3F51B5";
+    });
+    changeNameButton.addEventListener("mouseout", () => {
+        changeNameButton.style.color = "#FF5722";
+    });
+    changeNameButton.addEventListener("mousedown", () => {
+        changeNameButton.style.color = "#FF5722";
+    });
+    // Add logic to take new name
+    changeNameButton.addEventListener("mouseup", () => {
+        changeNameButton.style.color = "#3F51B5";
     });
     
     return {
