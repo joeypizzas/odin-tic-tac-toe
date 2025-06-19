@@ -163,6 +163,7 @@ const ui = (function changeUI() {
     const playerTwoButton = document.querySelector("#player-two-button");
     const dialogBackground = document.querySelectorAll(".dialog-background");
     const changeNameButton = document.querySelector("#change-name-button");
+    const form = document.querySelector("form");
     
     function displayBoard() {
         for (i = 0; i < boardArr.length; i++) {
@@ -291,6 +292,7 @@ const ui = (function changeUI() {
         gameContainer.classList.add("blur");
         footerContainer.classList.add("blur");
         dialog.show();
+        form.reset();
     }
 
     function closeDialog() {
@@ -298,6 +300,12 @@ const ui = (function changeUI() {
         gameContainer.classList.remove("blur");
         footerContainer.classList.remove("blur");
         dialog.close();
+        if (playerOneButton.classList.contains("change-player-one-name")) {
+            playerOneButton.classList.remove("change-player-one-name");
+        }
+        if (playerTwoButton.classList.contains("change-player-two-name")) {
+            playerTwoButton.classList.remove("change-player-two-name");
+        }
     }
 
     newGameButton.addEventListener("mouseover", () => {
@@ -370,12 +378,6 @@ const ui = (function changeUI() {
     dialogBackground.forEach(container => {
         container.addEventListener("click", () => {
             closeDialog();
-            if (playerOneButton.classList.contains("change-player-one-name")) {
-                playerOneButton.classList.remove("change-player-one-name");
-            }
-            if (playerTwoButton.classList.contains("change-player-two-name")) {
-                playerTwoButton.classList.remove("change-player-two-name");
-            }
         });
     });
 
@@ -388,9 +390,20 @@ const ui = (function changeUI() {
     changeNameButton.addEventListener("mousedown", () => {
         changeNameButton.style.color = "#FF5722";
     });
-    // Add logic to take new name
     changeNameButton.addEventListener("mouseup", () => {
         changeNameButton.style.color = "#3F51B5";
+        const newName = document.querySelector("input");
+        if (playerOneButton.classList.contains("change-player-one-name")) {
+            game.updatePlayerName(1, newName.value);
+        } else if (playerTwoButton.classList.contains("change-player-two-name")) {
+            game.updatePlayerName(2, newName.value);
+        }
+        updatePlayerNamesInUI();
+        closeDialog();
+    });
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
     });
     
     return {
