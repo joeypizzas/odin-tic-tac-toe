@@ -21,16 +21,18 @@ const gameboard = (function gameBoard() {
     function makeMove(rowMove, columnMove) {
         let isValidMove;
 
-        if (board[rowMove][columnMove] === 0) {
-            if (game.getActivePlayer().token === 1) {
-                board[rowMove][columnMove] = 1;
+        if (!game.checkWinner(board)) {
+            if (board[rowMove][columnMove] === 0) {
+                if (game.getActivePlayer().token === 1) {
+                    board[rowMove][columnMove] = 1;
+                } else {
+                    board[rowMove][columnMove] = 2;
+                }
+                isValidMove = 1;
             } else {
-                board[rowMove][columnMove] = 2;
+                ui.announceInvalidMove();
+                isValidMove = 0;
             }
-            isValidMove = 1;
-        } else {
-            ui.announceInvalidMove();
-            isValidMove = 0;
         }
         return isValidMove;
     }
@@ -128,12 +130,21 @@ const game = (function gameController() {
 
     function playRound(rowMove, columnMove) {
         let attemptedMoveWasValid = gameboard.makeMove(rowMove,columnMove);
+
         ui.removeBoard();
         ui.displayBoard();
+
+        const priorWinner = document.querySelector(".winner-announcement");
+        const priorDraw = document.querySelector(".draw-announcement");
+
         if (checkWinner(board) === 1 || checkWinner(board) === 2) {
-            ui.announceWinner();
+            if (!priorWinner) {
+                ui.announceWinner();
+            }
         } else if (checkWinner(board) === 3) {
-            ui.announceDraw();
+            if (!priorDraw) {
+                ui.announceDraw();
+            }
         } else {
             if (attemptedMoveWasValid) {
                 switchPlayerTurn();
