@@ -59,4 +59,3 @@
 4. Bugs: 
     - Don't allow to place on the board once a winner has been declared. 
     - Don't allow more than one winner statement, should be solved by the above. 
-    - Announce there is a draw if the board results in a draw. 
