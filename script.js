@@ -115,18 +115,25 @@ const game = (function gameController() {
         if (board[0][2] && board[0][2] === board[1][1] && board[0][2] === board[2][0]) {
             return board[0][2];
         }
-        return null;
+        for(let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board.length; j++) {
+                if (board[i][j] === 0) {
+                    return null;
+                }
+            }
+        }
+        const draw = 3;
+        return draw;
     }
 
     function playRound(rowMove, columnMove) {
         let attemptedMoveWasValid = gameboard.makeMove(rowMove,columnMove);
         ui.removeBoard();
         ui.displayBoard();
-        if (checkWinner(board)) {
+        if (checkWinner(board) === 1 || checkWinner(board) === 2) {
             ui.announceWinner();
-            if (checkWinner(board) === 2) {
-                switchPlayerTurn();
-            }
+        } else if (checkWinner(board) === 3) {
+            ui.announceDraw();
         } else {
             if (attemptedMoveWasValid) {
                 switchPlayerTurn();
@@ -206,6 +213,10 @@ const ui = (function changeUI() {
         if (priorWinner) {
             priorWinner.remove();
         }
+        const priorDraw = document.querySelector(".draw-announcement");
+        if (priorDraw) {
+            priorDraw.remove();
+        }
         displayBoard();
         if (game.getActivePlayer().token === 2) {
             game.switchPlayerTurn();
@@ -259,6 +270,23 @@ const ui = (function changeUI() {
         invalidAnnouncement.classList.add("invalid-announcement");
         invalidAnnouncement.textContent = `Oops! There's already a token there. It's still ${activePlayer.name}'s move.`;
         playerInfoContainer.appendChild(invalidAnnouncement);
+    }
+
+    function announceDraw() {
+        const priorActivePlayer = document.querySelector(".active-player-announcement");
+        if (priorActivePlayer) {
+            priorActivePlayer.remove();
+        }
+        const priorInvalidAnnouncement = document.querySelector(".invalid-announcement");
+        if (priorInvalidAnnouncement) {
+            priorInvalidAnnouncement.remove();
+        }
+
+        const drawAnnouncement = document.createElement("div");
+        drawAnnouncement.classList.add("player-name");
+        drawAnnouncement.classList.add("draw-announcement");
+        drawAnnouncement.textContent = "It's a draw! Tap \"New game\" to play again.";
+        playerInfoContainer.appendChild(drawAnnouncement);
     }
 
     function updatePlayerNamesInUI() {
@@ -415,7 +443,8 @@ const ui = (function changeUI() {
         announceInvalidMove,
         openDialog,
         closeDialog,
-        updatePlayerNamesInUI
+        updatePlayerNamesInUI, 
+        announceDraw
     }
 })();
 
