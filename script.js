@@ -19,9 +19,10 @@ const gameboard = (function gameBoard() {
     }
 
     function makeMove(rowMove, columnMove) {
+        const dialog = document.querySelector("dialog");
         let isValidMove;
 
-        if (!game.checkWinner(board)) {
+        if (!game.checkWinner(board) && !dialog.open) {
             if (board[rowMove][columnMove] === 0) {
                 if (game.getActivePlayer().token === 1) {
                     board[rowMove][columnMove] = 1;
