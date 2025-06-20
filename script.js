@@ -103,12 +103,14 @@ const game = (function gameController() {
     const board = gameboard.getBoard();
     function checkWinner(board) {
         for (let i = 0; i < board.length; i++) {
-            if (board[i][0] && board[i][0] === board[i][1] + board[i][0] === board[i][2]) {
+            if (board[i][0] && board[i][0] === board[i][1] && board[i][0] === board[i][2]) {
+                console.log(board[i][0]);
                 return board[i][0];
             }
         }
         for (let i = 0; i < board.length; i++) {
             if (board[0][i] && board[0][i] === board[1][i] && board[0][i] === board[2][i]) {
+                console.log(board[0][i]);
                 return board[0][i];
             }
         }
