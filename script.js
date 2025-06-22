@@ -1,11 +1,11 @@
 // JS for tic tac toe
 
-const gameboard = (function gameBoard() {
+const gameboard = (function gameBoard() { // Gameboard factory function 
     const rows = 3;
     const columns = 3;
     const board = [];
 
-    function resetBoard() {
+    function resetBoard() { // initalize/reset board array 
         for (let i = 0; i < rows; i++) {
             board[i] = [];
             for (let j = 0; j < columns; j++) {
@@ -18,7 +18,7 @@ const gameboard = (function gameBoard() {
         return board;
     }
 
-    function makeMove(rowMove, columnMove) {
+    function makeMove(rowMove, columnMove) { // Takes move input and places it in board array 
         const dialog = document.querySelector("dialog");
         let isValidMove;
 
@@ -38,19 +38,14 @@ const gameboard = (function gameBoard() {
         return isValidMove;
     }
 
-    function printBoard() {
-        console.log(board);
-    }
-
     return {
         getBoard,
         makeMove,
-        printBoard,
         resetBoard
     }
 })();
 
-const game = (function gameController() {
+const game = (function gameController() { // Game controller factory function 
     const players = [
         {
             name: "Player one",
@@ -66,7 +61,7 @@ const game = (function gameController() {
         return players;
     }
 
-    function updatePlayerName(playerToUpdate, newName) {
+    function updatePlayerName(playerToUpdate, newName) { // Updates player name in players array 
         if (playerToUpdate === players[0].token) {
             players[0].name = newName;
         } else {
@@ -74,25 +69,17 @@ const game = (function gameController() {
         }
     }
 
-    function resetPlayerNames() {
+    function resetPlayerNames() { // Resets player names, used with new game 
         players[0].name = "Player one";
         players[1].name = "Player two";
     }
 
-    let activePlayer = players[0];
+    let activePlayer = players[0]; // Active player used for controlling game 
     function getActivePlayer() {
         return activePlayer;
     }
 
-    function announceActivePlayer() {
-        if (activePlayer === players[0]) {
-            console.log("Player One, you're now on the clock.");
-        } else {
-            console.log("Player Two, you're now on the clock.");
-        }
-    }
-
-    function switchPlayerTurn() {
+    function switchPlayerTurn() { // Switches player turn foe game control 
         if (activePlayer === players[0]) {
             activePlayer = players[1];
         } else {
@@ -101,7 +88,7 @@ const game = (function gameController() {
     }
 
     const board = gameboard.getBoard();
-    function checkWinner(board) {
+    function checkWinner(board) { // Checks for 3 in a row in board or draw, used after making a move
         for (let i = 0; i < board.length; i++) {
             if (board[i][0] && board[i][0] === board[i][1] && board[i][0] === board[i][2]) {
                 console.log(board[i][0]);
@@ -131,7 +118,7 @@ const game = (function gameController() {
         return draw;
     }
 
-    function playRound(rowMove, columnMove) {
+    function playRound(rowMove, columnMove) { // Takes user input and make moves, displays winner or draw, or moves to next turn 
         let attemptedMoveWasValid = gameboard.makeMove(rowMove,columnMove);
 
         ui.removeBoard();
@@ -160,7 +147,6 @@ const game = (function gameController() {
         getActivePlayer,
         switchPlayerTurn,
         playRound, 
-        announceActivePlayer,
         updatePlayerName,
         resetPlayerNames,
         getPlayers, 
@@ -168,7 +154,7 @@ const game = (function gameController() {
     }
 })();
 
-const ui = (function changeUI() {
+const ui = (function changeUI() { // UI factory function 
     const boardArr = gameboard.getBoard();
     const gameboardElement = document.querySelector("#gameboard");
     const playerInfoContainer = document.querySelector("#player-info-container");
@@ -186,7 +172,7 @@ const ui = (function changeUI() {
     const changeNameButton = document.querySelector("#change-name-button");
     const form = document.querySelector("form");
     
-    function displayBoard() {
+    function displayBoard() { // Adds board to UI, used initially and after each move 
         for (i = 0; i < boardArr.length; i++) {
             const boardRow = document.createElement("div");
             boardRow.classList.add("board-row");
@@ -206,12 +192,12 @@ const ui = (function changeUI() {
         }
     }
 
-    function removeBoard() {
+    function removeBoard() { // Board removed after each move to allow for updated board
         const boardRows = document.querySelectorAll(".board-row");
         boardRows.forEach(row => row.remove());
     }
 
-    function newGame() {
+    function newGame() { // resets everything to allow for a new game 
         removeBoard();
         gameboard.resetBoard();
         game.resetPlayerNames();
@@ -238,7 +224,7 @@ const ui = (function changeUI() {
         announcePlayerTurn();
     }
 
-    function announcePlayerTurn() {
+    function announcePlayerTurn() { // Announces new turn after previous move 
         const priorActivePlayer = document.querySelector(".active-player-announcement");
         if (priorActivePlayer) {
             priorActivePlayer.remove();
@@ -256,7 +242,7 @@ const ui = (function changeUI() {
         playerInfoContainer.appendChild(activePlayerAnnouncement);
     }
 
-    function announceWinner() {
+    function announceWinner() { // Anounces winner once there is one 
         const priorActivePlayer = document.querySelector(".active-player-announcement");
         if (priorActivePlayer) {
             priorActivePlayer.remove();
@@ -274,7 +260,7 @@ const ui = (function changeUI() {
         playerInfoContainer.appendChild(winnerAccouncement);
     }
 
-    function announceInvalidMove() {
+    function announceInvalidMove() { // Announces bad move when one is made 
         const priorActivePlayer = document.querySelector(".active-player-announcement");
         priorActivePlayer.remove();
 
@@ -286,7 +272,7 @@ const ui = (function changeUI() {
         playerInfoContainer.appendChild(invalidAnnouncement);
     }
 
-    function announceDraw() {
+    function announceDraw() { // Announces draw when there is one 
         const priorActivePlayer = document.querySelector(".active-player-announcement");
         if (priorActivePlayer) {
             priorActivePlayer.remove();
@@ -303,7 +289,7 @@ const ui = (function changeUI() {
         playerInfoContainer.appendChild(drawAnnouncement);
     }
 
-    function updatePlayerNamesInUI() {
+    function updatePlayerNamesInUI() { // Updates prior name in the UI after one is changed
         const players = game.getPlayers();
 
         instructions.textContent = `Win the game with three in a row in any direction. ${players[0].name} uses X. ${players[1].name} uses O.`
@@ -329,7 +315,7 @@ const ui = (function changeUI() {
         }
     }
 
-    function openDialog() {
+    function openDialog() { // Allows for modal to change name
         titleContainer.classList.add("blur");
         gameContainer.classList.add("blur");
         footerContainer.classList.add("blur");
@@ -337,7 +323,7 @@ const ui = (function changeUI() {
         form.reset();
     }
 
-    function closeDialog() {
+    function closeDialog() { // Removes modal for changing name
         titleContainer.classList.remove("blur");
         gameContainer.classList.remove("blur");
         footerContainer.classList.remove("blur");
@@ -462,6 +448,7 @@ const ui = (function changeUI() {
     }
 })();
 
+// Initalizes game 
 gameboard.resetBoard();
 ui.displayBoard();
 ui.updatePlayerNamesInUI();
